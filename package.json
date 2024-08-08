@@ -1,0 +1,17 @@
+{
+  "name": "think-ui",
+  "version": "1.0.0",
+  "description": "This is a universal UI component library",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite"
+  },
+  "keywords": [
+    "think-ui"
+  ],
+  "author": "zhangyu",
+  "license": "ISC",
+  "devDependencies": {
+    "vite": "^5.3.5"
+  }
+}
