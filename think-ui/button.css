@@ -5,7 +5,7 @@
     background-color: #FFFFFF;
     color: var(--textColor);
     padding: 8px 10px;
-    border: 1px solid rgb(224, 224, 230);
+    border: 1px solid var(--borderColor);
     border-radius: 3px;
     font-size: var(--textSizeMedium);
     height: var(--textSizeMedium);
@@ -34,17 +34,17 @@
     transform: scale(.95);
 }
 
+.tk-btn:disabled:active {
+    transform: scale(1);
+}
+
 .tk-btn:disabled {
     cursor: not-allowed;
     opacity: 0.5;
 }
 
-.tk-btn:disabled:active {
-    transform: scale(1);
-}
-
 .tk-btn:disabled:hover {
-    border: 1px solid rgb(224, 224, 230);
+    border: 1px solid var(--borderColor);
     color: var(--textColor);
 }
 
@@ -54,7 +54,7 @@
 
 .tk-btn-dashed {
     background-color: transparent;
-    border: 1px dashed rgb(224, 224, 230);
+    border: 1px dashed var(--borderColor);
 }
 
 .tk-btn-dashed:hover, .tk-btn-dashed:active {
@@ -82,25 +82,25 @@
 }
 
 /* 大小 */
-.btn-mini {
+.tk-btn-mi {
     padding: 4px 6px;
     height: var(--textSizeMini);
     font-size: var(--textSizeMini);
 }
 
-.btn-small {
+.tk-btn-sm {
     padding: 5px 7px;
     height: var(--textSizeSmall);
     font-size: var(--textSizeSmall);
 }
 
-.btn-medium {
+.tk-btn-md {
     padding: 8px 10px;
     height: var(--textSizeMedium);
     font-size: var(--textSizeMedium);
 }
 
-.btn-large {
+.tk-btn-lg {
     padding: 10px 12px;
     height: var(--textSizeLarge);
     font-size: var(--textSizeLarge);

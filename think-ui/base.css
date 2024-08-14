@@ -7,13 +7,14 @@ html {
     margin: 0;
 }
 
-button,a,input,select {
+button, a, input, select, option, label, textarea, ul, li {
     all: unset;
 }
 
 :root {
     --bezier: cubic-bezier(.4, 0, .2, 1);
     --textColor: rgb(51, 54, 57);
+    --borderColor: rgb(224, 224, 230);
     --backgroundColor: rgba(46, 51, 56, .05);
     --textSizeMini: 11px;
     --textSizeSmall: 13px;
