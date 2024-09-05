@@ -1,8 +1,14 @@
 <template>
     <div>
-        <Scrollbar maxHeight="100vh" class="w-[180px] h-[100vh] border-r px-2">
-            <Menu :options="menuList" v-model:active="active" @update:active="handleUpdateValue" />
-        </Scrollbar>
+        <Header />
+        <div class="flex">
+            <Scrollbar maxHeight="100vh" class="w-[180px] scrollbar-height border-r p-2">
+                <Menu :options="menuList" v-model:active="active" @update:active="handleUpdateValue" />
+            </Scrollbar>
+            <main>
+                <slot />
+            </main>
+        </div>
     </div>
 </template>
 
@@ -55,3 +61,9 @@ const handleUpdateValue = (key: string | number, item: MenuItemType) => {
     console.log(key, item)
 }
 </script>
+
+<style scoped lang="scss">
+.scrollbar-height {
+    height: calc(100vh - 50px);
+}
+</style>
