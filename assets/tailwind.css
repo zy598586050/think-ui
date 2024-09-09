@@ -2,12 +2,53 @@
 @tailwind components;
 @tailwind utilities;
 
+html[data-theme='dark'] {
+    --primaryColor: #007BFF;
+    --primaryColorHover: #0056b3;
+    --primaryColorPressed: #004085;
+    --primaryColorShallow: #007BFF10;
+
+    --infoColor: #3498DB;
+    --infoColorHover: #2980b9;
+    --infoColorPressed: #20639b;
+    --infoColorShallow: #3498DB10;
+
+    --successColor: #27AE60;
+    --successColorHover: #229954;
+    --successColorPressed: #1e8449;
+    --successColorShallow: #27AE6010;
+
+    --warningColor: #F39C12;
+    --warningColorHover: #e67e22;
+    --warningColorPressed: #d35400;
+    --warningColorShallow: #F39C1210;
+
+    --errorColor: #E74C3C;
+    --errorColorHover: #d33;
+    --errorColorPressed: #b22222;
+    --errorColorShallow: #E74C3C10;
+}
+
 * {
     padding: 0;
     margin: 0;
 }
 
-button, a, input, select, option, label, textarea, ul, li, table, thead, tr, th, td, tbody {
+button,
+a,
+input,
+select,
+option,
+label,
+textarea,
+ul,
+li,
+table,
+thead,
+tr,
+th,
+td,
+tbody {
     all: unset;
 }
 

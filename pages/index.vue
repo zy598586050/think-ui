@@ -67,48 +67,43 @@
         <div class="flex flex-col space-y-2 w-[240px] mt-4">
             <Input type="text" placeholder="请输入内容" />
             <Input type="text" placeholder="请输入内容" disabled>
-                <template #suffix>
-                    <Search class="w-4 h-4 ml-1" />
-                </template>
+            <template #suffix>
+                <Search class="w-4 h-4 ml-1" />
+            </template>
             </Input>
             <Input type="text" placeholder="请输入邮箱">
-                <template #prefix>
-                    <Person class="w-4 h-4 mr-1" />
-                </template>
-                <template #suffix>
-                    <CloseCircleOutline class="w-4 h-4 ml-1" />
-                </template>
+            <template #prefix>
+                <Person class="w-4 h-4 mr-1" />
+            </template>
+            <template #suffix>
+                <CloseCircleOutline class="w-4 h-4 ml-1" />
+            </template>
             </Input>
             <Input type="password" placeholder="请输入密码">
-                <template #prefix>
-                    <LockClosedOutline class="w-4 h-4 mr-1" />
-                </template>
-                <template #suffix>
-                    <GlassesOutline class="w-4 h-4 ml-1" />
-                </template>
+            <template #prefix>
+                <LockClosedOutline class="w-4 h-4 mr-1" />
+            </template>
+            <template #suffix>
+                <GlassesOutline class="w-4 h-4 ml-1" />
+            </template>
             </Input>
             <Input type="text" placeholder="请输入内容" size="lg" />
             <Input type="textarea" placeholder="请输入内容" inputStyle="success" />
         </div>
-        <div class="flex flex-col space-y-2 w-[240px] mt-4">
-            <div class="flex items-center space-x-2">
-                <Radio v-model="radio" :value="1" @change="handleRadioChange">男</Radio>
-                <Radio v-model="radio" :value="2" @change="handleRadioChange">女</Radio>
-            </div>
-            <RadioGroup v-model="radio" @change="handleRadioChange">
-                <Radio :value="1">男</Radio>
-                <Radio :value="2" class="ml-2">女</Radio>
-            </RadioGroup>
+        <div class="flex flex-col w-[240px] mt-4">
+            <Radio v-model="radio" :options="redioOptions" @change="handleRadioChange" />
         </div>
-        <div class="flex flex-col space-y-2 w-[240px] mt-4">
-            <div class="flex items-center space-x-2">
-                <CheckBox v-model="check" @change="handleCheckChange">北京</CheckBox>
-                <CheckBox>上海</CheckBox>
+        <div class="flex flex-col w-[240px] mt-4">
+            <CheckBox v-model="check" :options="checkOptions" @change="handleCheckChange" />
+        </div>
+        <div class="flex items-center space-x-2 mt-4">
+            <Switch v-model="switchVal" disabled />
+            <Switch v-model="switchVal" />
+        </div>
+        <div class="flex space-x-2 mt-4">
+            <div class="w-[240px]">
+                <Select v-model="selectVal" :options="selectOptions" @change="handleChange" multiple />
             </div>
-            <CheckBoxGroup v-model="checkArray" @change="handleCheckGroupChange">
-                <CheckBox :value="1">北京</CheckBox>
-                <CheckBox :value="2" class="ml-2">上海</CheckBox>
-            </CheckBoxGroup>
         </div>
     </div>
 </template>
@@ -117,18 +112,59 @@
 import { CloudDownloadOutline, Close, Search, Person, CloseCircleOutline, LockClosedOutline, GlassesOutline } from '@vicons/ionicons5'
 
 const radio = ref()
-const check = ref(false)
-const checkArray = ref([1])
-
+const redioOptions = ref([
+    {
+        label: '男',
+        value: 1
+    },
+    {
+        label: '女',
+        value: 2
+    }
+])
 const handleRadioChange = (e: any) => {
     console.log(e, radio.value)
 }
 
+const check = ref([])
+const checkOptions = ref([
+    {
+        label: '北京',
+        value: 1
+    },
+    {
+        label: '上海',
+        value: 2
+    }
+])
 const handleCheckChange = (e: any) => {
     console.log(e, check.value)
 }
 
-const handleCheckGroupChange = (e: any) => {
-    console.log(e, checkArray.value)
+const switchVal = ref(false)
+
+const selectVal = ref([])
+const selectOptions = ref([
+    {
+        label: '选项一',
+        value: 1
+    },
+    {
+        label: '选项二',
+        value: 2,
+        disabled: true
+    },
+    {
+        label: '选项三',
+        value: 3
+    },
+    {
+        label: '选项四',
+        value: 4
+    }
+])
+
+const handleChange = (option: any) => {
+    console.log(option, selectVal.value)
 }
 </script>

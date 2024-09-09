@@ -15,7 +15,7 @@ interface MenuItemType {
 defineProps({
     options: {
         type: Array as () => MenuItemType[],
-        default: []
+        default: () => []
     },
     active: {
         type: [String, Number],
