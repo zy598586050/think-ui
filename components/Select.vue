@@ -6,13 +6,14 @@
             {{ modelValue.length > 0 ? '' : placeholder }}
             <div class="tk-select-tag" v-for="(item, index) in modelValue" :key="index">
                 {{ item.label }}
-                <svg @click="delTag(index)" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                <svg @click.stop="delTag(index)" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                 </svg>
             </div>
         </span>
-        <span :class="{ 'placeholder': modelValue.length === 0 }" v-else>{{ modelValue.length > 0 ? modelValue[0].label : placeholder }}</span>
+        <span :class="{ 'placeholder': modelValue.length === 0 }" v-else>{{ modelValue.length > 0 ? modelValue[0].label
+            : placeholder }}</span>
         <svg class="tk-select-drop" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
             :class="{ 'expand': isShowDrop, 'fold': !isShowDrop }">
             <path
@@ -21,9 +22,11 @@
         </svg>
         <ul class="tk-select-option" v-if="isShowDrop">
             <li v-for="(item, index) in options" :key="index"
-                :class="[{ 'tk-select-option-active': isSelect(item) }, { 'tk-select-option-disabled': item?.disabled }]" @click.stop="handleSelect(item)">
+                :class="[{ 'tk-select-option-active': isSelect(item) }, { 'tk-select-option-disabled': item?.disabled }]"
+                @click.stop="handleSelect(item)">
                 <span>{{ item.label }}</span>
-                <svg v-if="isSelect(item)" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+                <svg v-if="isSelect(item)" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor">
                     <path
                         d="M387.072 611.328L236.6464 460.8 128 569.3952l259.072 259.1232 515.1232-515.072L793.6 204.8z">
                     </path>
@@ -90,6 +93,23 @@ const handleSelect = (option: OptionType) => {
     }
     emit('change', option)
 }
+
+const handleClickOutside = (event: MouseEvent) => {
+    if (event.target instanceof Node) {
+        const dropdown = document.querySelector('.tk-select-option')
+        if (dropdown && !dropdown.contains(event.target)) {
+            isShowDrop.value = false
+        }
+    }
+}
+
+onMounted(() => {
+    document.addEventListener('mousedown', handleClickOutside)
+})
+
+onUnmounted(() => {
+    document.removeEventListener('mousedown', handleClickOutside)
+})
 </script>
 
 <style scoped lang="scss">
@@ -120,11 +140,13 @@ const handleSelect = (option: OptionType) => {
             padding: 0 8px;
             border-radius: 3px;
             margin-right: 4px;
+
             svg {
                 width: 12px;
                 height: 12px;
                 margin-left: 2px;
                 padding: 1px;
+
                 &:hover {
                     background: rgba(0, 0, 0, .1);
                 }
@@ -170,6 +192,7 @@ const handleSelect = (option: OptionType) => {
         flex-direction: column;
         overflow-y: auto;
         box-shadow: 0 3px 6px -4px rgba(0, 0, 0, .12), 0 6px 16px 0 rgba(0, 0, 0, .08), 0 9px 28px 8px rgba(0, 0, 0, .05);
+        z-index: 999;
 
         &::-webkit-scrollbar {
             width: 0;

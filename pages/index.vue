@@ -90,20 +90,62 @@
             <Input type="text" placeholder="请输入内容" size="lg" />
             <Input type="textarea" placeholder="请输入内容" inputStyle="success" />
         </div>
-        <div class="flex flex-col w-[240px] mt-4">
+        <div class="w-[240px] mt-4">
             <Radio v-model="radio" :options="redioOptions" @change="handleRadioChange" />
         </div>
-        <div class="flex flex-col w-[240px] mt-4">
+        <div class="w-[240px] mt-4">
             <CheckBox v-model="check" :options="checkOptions" @change="handleCheckChange" />
         </div>
         <div class="flex items-center space-x-2 mt-4">
             <Switch v-model="switchVal" disabled />
             <Switch v-model="switchVal" />
         </div>
-        <div class="flex space-x-2 mt-4">
+        <div class="mt-4">
             <div class="w-[240px]">
                 <Select v-model="selectVal" :options="selectOptions" @change="handleChange" multiple />
             </div>
+        </div>
+        <div class="mt-4">
+            <DropDown :options="dropDownOptions" trigger="click" @on-select="dropDownSelect">
+                <Button>下拉菜单</Button>
+            </DropDown>
+        </div>
+        <div class="mt-4 w-[400px]">
+            <Tabs type="segment" v-model="tabActive" @on-select="tabSelect">
+                <TabPane label="Tab1" name="first">
+                    Content1
+                </TabPane>
+                <TabPane label="Tab2" name="second">
+                    Content2
+                </TabPane>
+                <TabPane label="Tab3" name="third">
+                    Content3
+                </TabPane>
+            </Tabs>
+        </div>
+        <div class="mt-4 w-[400px]">
+            <Table>
+                <template #header>
+                    <th>序号</th>
+                    <th>姓名</th>
+                    <th>性别</th>
+                    <th>职业</th>
+                </template>
+                <template #body>
+                    <tr>
+                        <td>1</td>
+                        <td>鲁班</td>
+                        <td>男</td>
+                        <td>射手</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>狐狸</td>
+                        <td>女</td>
+                        <td>中单</td>
+                    </tr>
+                </template>
+            </Table>
         </div>
     </div>
 </template>
@@ -166,5 +208,47 @@ const selectOptions = ref([
 
 const handleChange = (option: any) => {
     console.log(option, selectVal.value)
+}
+
+const dropDownOptions = ref([
+    {
+        label: '选择一',
+        key: 1
+    },
+    {
+        label: '选择二',
+        key: 2,
+        disabled: true
+    },
+    {
+        label: '选择三',
+        key: 3
+    },
+    {
+        label: '选择四特别长特别长特别长选择四特别长特别长特别长',
+        key: 4
+    },
+    {
+        label: '选择五',
+        children: [
+            {
+                label: '选择五-1',
+                key: 6
+            },
+            {
+                label: '选择五-2',
+                key: 7
+            }
+        ]
+    }
+])
+
+const dropDownSelect = (key: string | number) => {
+    console.log('选择了', key)
+}
+
+const tabActive = ref('first')
+const tabSelect = (key: string | number) => {
+    console.log('选择了', key)
 }
 </script>

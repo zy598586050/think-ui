@@ -8,8 +8,8 @@
                 </template>
             </Input>
             <div class="flex mr-2">
-                <Button quaternary>深色</Button>
-                <Button quaternary>GitHub</Button>
+                <Button quaternary @click="switchTheme">{{ theme }}</Button>
+                <Button quaternary @click="goGitHub">GitHub</Button>
                 <Button quaternary>1.0.0</Button>
             </div>
         </div>
@@ -18,4 +18,15 @@
 
 <script setup lang="ts">
 import { Search } from '@vicons/ionicons5'
+
+const theme = ref('深色')
+
+const goGitHub = () => {
+    window.open('https://github.com/zy598586050/think-ui', '_blank')
+}
+
+const switchTheme = () => {
+    theme.value = theme.value === '深色' ? '浅色' : '深色'
+    document.documentElement.setAttribute('data-theme', theme.value === '深色' ? 'dark' : 'light')
+}
 </script>
